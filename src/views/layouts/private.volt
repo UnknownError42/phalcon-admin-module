@@ -6,9 +6,9 @@
             <!-- Logo -->
             <a href="{{ url(router.getModuleName()) }}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini">{{ config.gazlab.logo.mini }}</span>
+                <span class="logo-mini">{{ config.gazlab.logo.mini is defined ? config.gazlab.logo.mini : '<b>G</b>A' }}</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg">{{ config.gazlab.logo.lg }}</span>
+                <span class="logo-lg">{{ config.gazlab.logo.lg is defined ? config.gazlab.logo.lg : '<b>Gazlab</b>Admin' }}</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
