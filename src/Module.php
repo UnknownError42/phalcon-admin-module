@@ -64,7 +64,10 @@ class Module implements ModuleDefinitionInterface
                 $config = $override;
             }
 
-            $config->merge(include APP_PATH . '/modules/admin/config/config.php');
+            $pathConfig = APP_PATH . '/modules/admin/config/config.php';
+            if (file_exists($pathConfig)){
+                $config->merge(include $pathConfig);
+            }
         }
 
         /**
