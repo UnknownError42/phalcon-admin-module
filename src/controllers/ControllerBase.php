@@ -10,6 +10,7 @@ class ControllerBase extends Controller
 {
     public $area = 'public';
     public $identity;
+    public $menu;
 
     public function getArea()
     {
@@ -33,7 +34,8 @@ class ControllerBase extends Controller
         $this->view->identity = $this->identity;
         $this->view->mainNavigation = $this->getResources();
 
-        $this->tag->setTitle($this->config->gazlab->title);
+        $title = isset($this->config->gazlab->title) ? $this->config->gazlab->title : 'GazlabAdmin';
+        $this->tag->setTitle($title);
 
         $this->breadcrumbs->add('Home', $this->url->get($this->router->getModuleName()));
         if ($this->router->getControllerName() !== 'index'){
