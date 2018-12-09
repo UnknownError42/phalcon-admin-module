@@ -106,7 +106,7 @@ class Module implements ModuleDefinitionInterface
             if (ENVIRONMENT === 'development'){
                 $eventsManager = new EventsManager();
 
-                $path = APP_PATH . '/logs';
+                $path = APP_PATH . '/modules/admin/logs';
                 @mkdir($path);
                 $logger = new FileLogger($path . '/'.date('Ymd').'.log');
 
