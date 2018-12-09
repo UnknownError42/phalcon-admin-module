@@ -11,6 +11,7 @@ class ControllerBase extends Controller
     public $area = 'public';
     public $identity;
     public $menu;
+    public $group;
 
     public function getArea()
     {
