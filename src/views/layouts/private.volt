@@ -99,4 +99,4 @@
     {% do assets.addCss('gazlab_assets/datatables.net-bs/css/dataTables.bootstrap.min.css') %}
     {% do assets.addJs('gazlab_assets/datatables.net/js/jquery.dataTables.min.js') %}
     {% do assets.addJs('gazlab_assets/datatables.net-bs/js/dataTables.bootstrap.min.js') %}
-    {% do assets.addInlineJs(view.getPartial('layouts/private.js')) %}
+    {% do assets.addInlineJs(view.getPartial(view.getLayoutsDir() ~ 'private.js')) %}

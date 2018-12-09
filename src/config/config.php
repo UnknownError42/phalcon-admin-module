@@ -4,7 +4,7 @@ return [
     'application' => [
         'controllersDir' => __DIR__ . '/../controllers/',
         'modelsDir'      => __DIR__ . '/../models/',
-        'viewsDir'       => __DIR__ . '/../views/',
+        'viewsDir'       => APP_PATH . '/modules/admin/views/',
         'adminControllersDir' => APP_PATH . '/modules/admin/controllers/',
     ],
     'gravatar' => [

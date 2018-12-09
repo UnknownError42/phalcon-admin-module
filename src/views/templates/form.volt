@@ -25,4 +25,4 @@
 </div>
 {% endif %}
 
-{% do assets.addInlineJs(view.getPartial('templates/form.js')) %}
+{% do assets.addInlineJs(view.getPartial(view.getLayoutsDir() ~ '/../templates/form.js')) %}

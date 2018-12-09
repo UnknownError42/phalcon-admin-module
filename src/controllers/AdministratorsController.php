@@ -7,6 +7,14 @@ use Gazlab\Admin\Models\GazlabProfiles;
 
 class AdministratorsController extends Resource
 {
+    
+    public function initialize()
+    {
+        $this->view->setViewsDir(__DIR__ . '/../views/');
+        
+        parent::initialize();
+    }
+
     public $menu = [
         'administrators',
         'name' => 'Administrators',

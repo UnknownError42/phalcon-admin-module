@@ -5,6 +5,13 @@ namespace Gazlab\Admin\Controllers;
 class SessionsController extends ControllerBase
 {
 
+    public function initialize()
+    {
+        $this->view->setViewsDir(__DIR__ . '/../views/');
+        
+        parent::initialize();
+    }
+
     public function signInAction()
     {
         if ($this->request->isPost()){

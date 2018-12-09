@@ -16,6 +16,6 @@ class Column extends \Phalcon\Mvc\User\Component
 
     public function render()
     {
-        return $this->view->getPartial('templates/column', $this->params);
+        return $this->view->getPartial(__DIR__ . '/../views/templates/column', $this->params);
     }
 }

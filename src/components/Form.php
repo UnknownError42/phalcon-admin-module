@@ -16,6 +16,6 @@ class Form extends \Phalcon\Mvc\User\Component
 
     public function render()
     {
-        return $this->view->getPartial('templates/form', $this->params);
+        return $this->view->getPartial(__DIR__ . '/../views/templates/form', $this->params);
     }
 }

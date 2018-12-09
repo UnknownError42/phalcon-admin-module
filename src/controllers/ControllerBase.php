@@ -27,7 +27,7 @@ class ControllerBase extends Controller
     {
         $this->installAssets();
 
-        $this->assets->addInlineJs($this->view->getPartial('index.js'));
+        $this->assets->addInlineJs($this->view->getPartial(__DIR__ . '/../views/index.js'));
     }
 
     public function initialize()

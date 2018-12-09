@@ -15,6 +15,7 @@ use Phalcon\Mvc\Dispatcher as MvcDispatcher;
 use Phalcon\Events\Event;
 use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Breadcrumbs;
+use Phalcon\Logger\Adapter\File as FileLogger;
 
 class Module implements ModuleDefinitionInterface
 {
@@ -78,6 +79,8 @@ class Module implements ModuleDefinitionInterface
 
             $view = new View();
             $view->setViewsDir($config->get('application')->viewsDir);
+            $view->setLayoutsDir(__DIR__ . '/views/layouts/');
+            $view->setMainView(__DIR__ . '/views/index');
             
             $view->registerEngines([
                 '.volt'  => 'voltShared',
@@ -98,7 +101,28 @@ class Module implements ModuleDefinitionInterface
             $dbAdapter = '\Phalcon\Db\Adapter\Pdo\\' . $dbConfig['adapter'];
             unset($config['adapter']);
 
-            return new $dbAdapter($dbConfig);
+            $connection = new $dbAdapter($dbConfig);
+
+            if (ENVIRONMENT === 'development'){
+                $eventsManager = new EventsManager();
+
+                $path = APP_PATH . '/logs';
+                @mkdir($path);
+                $logger = new FileLogger($path . '/'.date('Ymd').'.log');
+
+                $eventsManager->attach(
+                    'db:beforeQuery',
+                    function ($event, $connection) use ($logger) {
+                        $logger->info(
+                            "\n\t[QUERY] " . $connection->getSQLStatement() . (!is_null($connection->getSqlVariables()) ? "\n\t[PARAMS] " . json_encode($connection->getSqlVariables()) : null)
+                        );
+                    }
+                );
+
+                $connection->setEventsManager($eventsManager);
+            }
+
+            return $connection;
         };
 
         $di->setShared('gravatar', function () use ($config) {

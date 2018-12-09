@@ -45,7 +45,7 @@ class Resource extends ControllerBase
         $this->view->contents = [
             new Table($this->columns, ['box'=>true])
         ];
-        $this->view->pick('templates/content');
+        $this->view->pick(__DIR__ . '/../views/templates/content');
 
         $columns = [];
         foreach ($this->columns as $column){
@@ -68,12 +68,19 @@ class Resource extends ControllerBase
         }
         
         $columns = join(', ',$columns);
-        $this->assets->addInlineJs($this->view->getPartial('templates/table.js', ['columns' => $columns]));
+        $this->assets->addInlineJs($this->view->getPartial(__DIR__ . '/../views/templates/table.js', ['columns' => $columns]));
     }
 
     public function params()
     {
-        return $this->request->get($this->controllerName);
+        $params = [];
+        foreach ($this->request->get($this->controllerName) as $key => $value){
+            if (!empty($value)){
+                $params[$key] = $value;
+            }
+        }
+
+        return $params;
     }
 
     public function createAction()
@@ -100,7 +107,7 @@ class Resource extends ControllerBase
         $this->view->contents = [
             new Form($this->formGroups, ['box' => true, 'title' => 'New'])
         ];
-        $this->view->pick('templates/content');
+        $this->view->pick(__DIR__ . '/../views/templates/content');
     }
 
     public function updateAction($id)
@@ -137,7 +144,7 @@ class Resource extends ControllerBase
         $this->view->contents = [
             new Form($this->formGroups, ['box' => true, 'title' => 'Edit'])
         ];
-        $this->view->pick('templates/content');
+        $this->view->pick(__DIR__ . '/../views/templates/content');
     }
 
     public function deleteAction($id)
@@ -207,7 +214,7 @@ class Resource extends ControllerBase
         $params['label'] = isset($params['label']) ? $params['label'] : ucwords(\Phalcon\Text::humanize($params[0]));
         $params[0] = $this->router->getControllerName() . '['.$params[0].']';
 
-        return array_push($this->formGroups, $this->view->getPartial('templates/formGroup', [
+        return array_push($this->formGroups, $this->view->getPartial(__DIR__ . '/../views/templates/formGroup', [
             'contents' => $fields,
             'params' => $params
         ]));

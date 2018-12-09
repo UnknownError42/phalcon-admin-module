@@ -16,6 +16,6 @@ class Table extends \Phalcon\Mvc\User\Component
 
     public function render()
     {
-        return $this->view->getPartial('templates/table', $this->params);
+        return $this->view->getPartial(__DIR__ . '/../views/templates/table', $this->params);
     }
 }

@@ -5,6 +5,13 @@ namespace Gazlab\Admin\Controllers;
 class IndexController extends ControllerBase
 {
 
+    public function initialize()
+    {
+        $this->view->setViewsDir(__DIR__ . '/../views/');
+        
+        parent::initialize();
+    }
+
     public function indexAction()
     {
         // $this->dispatcher->forward([
@@ -15,7 +22,7 @@ class IndexController extends ControllerBase
 
     public function errorAction()
     {
-        echo '404';
+        
     }
 
 }
